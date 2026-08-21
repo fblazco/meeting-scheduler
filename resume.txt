@@ -1,0 +1,173 @@
+Here is a summary of how the **University Tutoring Scheduler** application works and the role of its core files:
+
+---
+
+### 💡 Core Concept & User Flow
+
+1. **Authentication**: Users log in with their email.
+2. **Schedule Creation (Owner Mode)**:
+   - A tutor/user creates a scheduling space with available time slots and becomes the **Schedule Owner**.
+   - The owner generates a **shareable link** (with a unique token/URL) to invite students/peers.
+3. **Booking (Student / Attendee Mode)**:
+   - Anyone with the link opens the booking view, selects an available slot, and submits a meeting request.
+4. **Acceptance / Management**:
+   - The Schedule Owner reviews incoming requests on their dashboard to **Accept** or **Reject** them.
+
+---
+
+### 🖥️ Backend Core Files (`TypeScript + Sequelize + PostgreSQL`)
+
+| Category | File | Description |
+| :--- | :--- | :--- |
+| **Database Connection** | [`database.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/config/database.ts) | Initializes Sequelize with PostgreSQL connection settings and pool. |
+| **User Model** | [`User.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/User.ts) | Stores user info (`id`, `email`, `name`, timestamps). |
+| **Schedule Model** | [`Schedule.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/Schedule.ts) | Stores schedule calendars created by tutors (`ownerId`, `title`, `description`, `linkToken`). |
+| **TimeSlot Model** | [`TimeSlot.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/TimeSlot.ts) | Defines specific date/time intervals open for bookings (`startTime`, `endTime`, `isBooked`). |
+| **Booking Model** | [`Booking.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/Booking.ts) | Tracks booking requests with status (`pending`, `accepted`, `rejected`, `studentEmail`, `notes`). |
+| **Schedule Logic** | [`scheduleController.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/controllers/scheduleController.ts) / [`scheduleService.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/services/scheduleService.ts) | Endpoints & logic for creating schedules, generating links, and setting available slots. |
+| **Booking Logic** | [`bookingController.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/controllers/bookingController.ts) / [`bookingService.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/services/bookingService.ts) | Endpoints & logic to request a meeting and allow owners to accept/reject requests. |
+| **API Entrypoint** | [`app.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/app.ts) / [`server.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/server.ts) | Sets up Express middlewares, mounts [`routes/index.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/routes/index.ts), and starts the server. |
+
+---
+
+### 🌐 Frontend Core Files (`React + JavaScript`)
+
+| Category | File | Description |
+| :--- | :--- | :--- |
+| **Login View** | [`LoginPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/LoginPage.jsx) | Email sign-in screen. |
+| **Owner Dashboard** | [`DashboardPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/DashboardPage.jsx) | Overview of schedules created by the logged-in tutor and pending meeting requests. |
+| **Schedule Details** | [`ScheduleDetailPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/ScheduleDetailPage.jsx) | Management screen for the owner to view time slots, configure availability, and manage attendees. |
+| **Public Booking View** | [`PublicBookingPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/PublicBookingPage.jsx) | The public link page loaded by students to book an available slot. |
+| **Request Approvals** | [`BookingRequestsList.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/booking/BookingRequestsList.jsx) | Component with **Accept** and **Reject** action buttons for incoming meeting requests. |
+| **Slot Picker** | [`BookingSlotPicker.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/booking/BookingSlotPicker.jsx) | Interactive UI for choosing available time slots. |
+| **Share Link Modal** | [`ShareLinkModal.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/schedule/ShareLinkModal.jsx) | Modal to generate and copy the public invitation link for students. |
+| **Global State** | [`AuthContext.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/context/AuthContext.jsx) & [`ScheduleContext.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/context/ScheduleContext.jsx) | React Contexts managing active user session and schedule states. |
+| **API Client** | [`api.js`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/services/api.js) | Base Axios/Fetch client connecting frontend to backend endpoints. 
+|For a full-stack project like this, the most effective strategy is **Backend-First (Contract-Driven) followed by Feature-by-Feature Frontend Integration**.
+
+---
+
+### 🏆 Recommended Strategy: **Backend First ➔ Vertical Feature Slices**
+
+Starting with the backend foundation allows you to define your data models and API contracts early. When you build the React frontend, you will connect real endpoints immediately rather than writing and discarding temporary mock data.
+
+---
+
+### 🗺️ Priority Dev Roadmap
+
+```mermaid
+flowchart TD
+    P1[Phase 1: DB & Models] --> P2[Phase 2: Core Backend APIs]
+    P2 --> P3[Phase 3: Frontend Foundation & Auth]
+    P3 --> P4[Phase 4: Owner Flow - Create & Share]
+    P4 --> P5[Phase 5: Student Flow - Book Slots]
+    P5 --> P6[Phase 6: Owner Approval & Polish]
+```
+
+---
+
+### Phase 1: Database & Model Layer (Highest Priority)
+**Goal:** Have a running PostgreSQL database connected via Sequelize with defined relationships.
+
+1. **Dependencies & Config**:
+   - Fill [`backend/package.json`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/package.json), [`backend/tsconfig.json`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/tsconfig.json), and [`backend/.env.example`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/.env.example).
+   - Connect Sequelize to PostgreSQL in [`database.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/config/database.ts).
+2. **Data Models & Associations**:
+   - Define [`User.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/User.ts) (Tutors & Students).
+   - Define [`Schedule.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/Schedule.ts) (linked to `ownerId` with unique `linkToken`).
+   - Define [`TimeSlot.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/TimeSlot.ts) (linked to `scheduleId`).
+   - Define [`Booking.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/Booking.ts) (linked to `timeSlotId` and `studentEmail`, with status: `pending` | `accepted` | `rejected`).
+   - Wire relationships in [`models/index.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/models/index.ts).
+
+---
+
+### Phase 2: Core Backend Endpoints
+**Goal:** Verify CRUD operations via API before touching UI.
+
+1. **Authentication**:
+   - Email login route in [`authRoutes.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/routes/authRoutes.ts) and [`authController.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/controllers/authController.ts).
+2. **Schedule & Slots Management**:
+   - Create schedule and create time slots in [`scheduleRoutes.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/routes/scheduleRoutes.ts).
+   - Get schedule by public `linkToken` for student access.
+3. **Bookings & Approvals**:
+   - Submit booking request (`POST /api/bookings`) in [`bookingRoutes.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/routes/bookingRoutes.ts).
+   - Accept/Reject booking (`PATCH /api/bookings/:id/status`).
+
+---
+
+### Phase 3: Frontend Foundation & Setup
+**Goal:** A working React application with shared styles and API communication.
+
+1. **Setup**:
+   - Configure [`frontend/package.json`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/package.json), [`frontend/vite.config.js`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/vite.config.js), and styling tokens in [`index.css`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/assets/styles/index.css).
+2. **API Client & Auth State**:
+   - Base fetch/axios wrapper in [`api.js`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/services/api.js).
+   - User session management in [`AuthContext.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/context/AuthContext.jsx).
+   - Login page in [`LoginPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/LoginPage.jsx).
+
+---
+
+### Phase 4: Owner Experience (Create & Manage)
+**Goal:** Tutors can log in, create schedules, set available time slots, and copy invite links.
+
+1. **Dashboard & Schedule Creation**:
+   - [`DashboardPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/DashboardPage.jsx) to view own schedules.
+   - [`CreateScheduleModal.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/schedule/CreateScheduleModal.jsx) to set title, description, and available dates/hours.
+   - [`ShareLinkModal.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/schedule/ShareLinkModal.jsx) to copy the public invitation link.
+
+---
+
+### Phase 5: Student Booking Experience (Public Flow)
+**Goal:** Anyone opening a shared link can see available slots and request a meeting.
+
+1. **Public View**:
+   - Route `/schedule/:linkToken` handled by [`PublicBookingPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/PublicBookingPage.jsx).
+   - Slot picker in [`BookingSlotPicker.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/booking/BookingSlotPicker.jsx).
+   - Attendee email & reason submission via [`BookingForm.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/booking/BookingForm.jsx).
+
+---
+
+### Phase 6: Decision Loop & Polish
+**Goal:** Tutor sees requests, accepts/rejects them, and the schedule updates in real-time.
+
+1. **Approvals UI**:
+   - [`BookingRequestsList.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/components/booking/BookingRequestsList.jsx) inside [`ScheduleDetailPage.jsx`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/frontend/src/pages/ScheduleDetailPage.jsx).
+2. **Conflict Prevention**:
+   - Prevent double-booking on accepted slots.
+   - Error states, loading spinners, and toast notifications.
+
+---
+
+### 🚀 Summary & Next Step
+
+Start with **Phase 1** (installing backend packages, configuring PostgreSQL connection in [`database.ts`](file:///Users/felipeblasquezcontreras/Desktop/Archivos/2026-2/meeting-sheduler/backend/src/config/database.ts), and writing the Sequelize models). 
+
+When you're ready, let me know if we should begin configuring the backend dependencies and database models!
+
+flowchart TD
+    P1[Phase 1: DB & Models] --> P2[Phase 2: Core Backend APIs]
+    P2 --> P3[Phase 3: Frontend Foundation & Auth]
+    P3 --> P4[Phase 4: Owner Flow - Create & Share]
+    P4 --> P5[Phase 5: Student Flow - Book Slots]
+    P5 --> P6[Phase 6: Owner Approval & Polish]
+Complete API Endpoint Map
+Method	Endpoint	Access	Description
+GET	/api/health	Public	API Health Check
+POST	/api/auth/register	Public	Register new user
+POST	/api/auth/login	Public	Login with email & password
+GET	/api/auth/me	Protected	Current user profile
+GET	/api/schedules/public/:linkToken	Public	Attendee booking view
+POST	/api/schedules	Protected	Create new schedule & slots
+GET	/api/schedules/my-schedules	Protected	List owner's schedules
+GET	/api/schedules/:id	Protected	Get schedule details
+PUT	/api/schedules/:id	Protected	Update schedule settings
+DELETE	/api/schedules/:id	Protected	Delete schedule
+POST	/api/schedules/:id/slots	Protected	Add time slots
+DELETE	/api/schedules/slots/:slotId	Protected	Delete a time slot
+POST	/api/bookings	Public / Opt. Auth	Submit meeting booking request
+GET	/api/bookings/schedule/:scheduleId	Protected (Owner)	List schedule's incoming bookings
+PATCH	/api/bookings/:id/status	Protected (Owner)	Accept or Reject request
+GET	/api/bookings/my-bookings	Protected	List attendee's bookings
+PATCH	/api/bookings/:id/cancel	Opt. Auth / Public	Cancel a booking
+GET	/api/users/profile	Protected	Get profile details
+PUT	/api/users/profile	Protected	Update profile
