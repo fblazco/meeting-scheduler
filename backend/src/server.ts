@@ -3,6 +3,7 @@ dotenv.config();
 
 import app from './app';
 import { connectDB, sequelize } from './config/database';
+
 // Import models to ensure associations are registered before sync
 import './models';
 
@@ -12,19 +13,25 @@ const startServer = async () => {
   try {
     // 1. Test database connection
     await connectDB();
+    console.log('✅ PostgreSQL connection established.');
 
     // 2. Sync database schema
     const isDev = process.env.NODE_ENV !== 'production';
-    await sequelize.sync({ alter: isDev });
+
+    await sequelize.sync({
+      alter: isDev,
+    });
+
     console.log('📦 Database schema synchronized.');
 
     // 3. Start listening for requests
-    app.listen(PORT, () => {
-      console.log(`🚀 Meeting Scheduler Server is running on port ${PORT}`);
-      console.log(`📡 API endpoints base URL: http://localhost:${PORT}/api`);
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(
+        `🚀 Meeting Scheduler Server is running on port ${PORT}`
+      );
     });
   } catch (error) {
-    console.error('Failed to start server:', error);
+    console.error('❌ Failed to start server:', error);
     process.exit(1);
   }
 };
