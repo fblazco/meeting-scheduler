@@ -12,8 +12,17 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health check
+app.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'Meeting Scheduler API is running',
+  });
+});
 
 // API Routes
 app.use('/api', routes);
