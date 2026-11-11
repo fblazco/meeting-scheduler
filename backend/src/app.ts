@@ -1,6 +1,8 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import routes from './routes';
+// Register models & associations so the app works standalone (e.g. Vercel's Express preset)
+import './models';
 import { notFoundHandler, errorHandler } from './middlewares/errorMiddleware';
 
 const app: Application = express();
