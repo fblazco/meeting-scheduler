@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Calendar, Clock, Bell, RefreshCw } from 'lucide-react';
+import { Plus, RefreshCw } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import useSchedule from '../hooks/useSchedule';
 import ScheduleList from '../components/schedule/ScheduleList';
@@ -33,8 +33,8 @@ export const DashboardPage = () => {
       {/* Header & Action */}
       <div className="page-header">
         <div>
-          <h1>Welcome back, {user?.name || 'Tutor'} 👋</h1>
-          <p>Manage your office hours, available booking intervals, and student meeting requests.</p>
+          <h1>Welcome back, {user?.name || 'Tutor'}</h1>
+          <p style={{ marginTop: '0.35rem' }}>Your office hours, open times and student requests.</p>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem' }}>
@@ -51,7 +51,7 @@ export const DashboardPage = () => {
             icon={Plus}
             onClick={() => setCreateModalOpen(true)}
           >
-            Create Schedule
+            New schedule
           </Button>
         </div>
       </div>
@@ -65,48 +65,39 @@ export const DashboardPage = () => {
           marginBottom: '2rem',
         }}
       >
-        <Card style={{ borderLeft: '4px solid var(--primary)' }}>
+        <Card>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
-              <p style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Active Calendars
+              <p style={{ fontSize: '0.88rem' }}>
+                Active schedules
               </p>
-              <h2 style={{ marginTop: '0.25rem', fontSize: '1.8rem' }}>
+              <h2 style={{ marginTop: '0.25rem', fontSize: '2.2rem', fontFamily: 'var(--font-heading)' }}>
                 {activeSchedules} <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>/ {totalSchedules}</span>
               </h2>
             </div>
-            <div style={{ background: 'var(--primary-light)', padding: '0.75rem', borderRadius: 'var(--radius-md)' }}>
-              <Calendar size={22} color="var(--primary)" />
+          </div>
+        </Card>
+
+        <Card>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div>
+              <p style={{ fontSize: '0.88rem' }}>
+                Open time slots
+              </p>
+              <h2 style={{ marginTop: '0.25rem', fontSize: '2.2rem', fontFamily: 'var(--font-heading)' }}>{totalOpenSlots}</h2>
             </div>
           </div>
         </Card>
 
-        <Card style={{ borderLeft: '4px solid var(--secondary)' }}>
+        <Card>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
-              <p style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Available Slots
+              <p style={{ fontSize: '0.88rem' }}>
+                Requests awaiting reply
               </p>
-              <h2 style={{ marginTop: '0.25rem', fontSize: '1.8rem' }}>{totalOpenSlots}</h2>
-            </div>
-            <div style={{ background: 'var(--secondary-light)', padding: '0.75rem', borderRadius: 'var(--radius-md)' }}>
-              <Clock size={22} color="var(--secondary)" />
-            </div>
-          </div>
-        </Card>
-
-        <Card style={{ borderLeft: '4px solid var(--warning)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div>
-              <p style={{ fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Pending Requests
-              </p>
-              <h2 style={{ marginTop: '0.25rem', fontSize: '1.8rem', color: totalPendingRequests > 0 ? '#fbbf24' : 'inherit' }}>
+              <h2 style={{ marginTop: '0.25rem', fontSize: '2.2rem', fontFamily: 'var(--font-heading)', color: totalPendingRequests > 0 ? 'var(--warning-text)' : 'inherit' }}>
                 {totalPendingRequests}
               </h2>
-            </div>
-            <div style={{ background: 'var(--warning-light)', padding: '0.75rem', borderRadius: 'var(--radius-md)' }}>
-              <Bell size={22} color="var(--warning)" />
             </div>
           </div>
         </Card>
@@ -117,7 +108,7 @@ export const DashboardPage = () => {
 
       {/* Schedules List Section */}
       <div style={{ marginBottom: '1.25rem' }}>
-        <h2 style={{ fontSize: '1.4rem', marginBottom: '1rem' }}>Your Scheduling Spaces</h2>
+        <h2 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>Your schedules</h2>
         {loading && schedules.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '3rem 0', color: 'var(--text-muted)' }}>
             Loading your schedules...

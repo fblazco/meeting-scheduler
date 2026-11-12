@@ -72,7 +72,7 @@ export const BookingForm = ({ slot, schedule, onSuccess }) => {
         <div
           style={{
             background: 'var(--primary-light)',
-            border: '1px solid rgba(99, 102, 241, 0.3)',
+            border: '1px solid var(--primary)',
             borderRadius: 'var(--radius-md)',
             padding: '0.85rem 1rem',
             display: 'flex',
@@ -82,8 +82,8 @@ export const BookingForm = ({ slot, schedule, onSuccess }) => {
         >
           <Clock size={20} color="var(--primary)" />
           <div>
-            <span style={{ fontSize: '0.78rem', color: 'var(--primary)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
-              Selected Time
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              Selected time
             </span>
             <div style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '0.95rem' }}>
               {formatDateTime(slot.startTime)}

@@ -57,7 +57,7 @@ export const PublicBookingPage = () => {
           <div style={{ color: 'var(--danger)', marginBottom: '1rem' }}>
             <Calendar size={48} style={{ margin: '0 auto' }} />
           </div>
-          <h2>Schedule Unavailable</h2>
+          <h2>Schedule unavailable</h2>
           <p style={{ marginTop: '0.5rem', marginBottom: '1.5rem' }}>{error}</p>
           <Link to="/" className="btn btn-secondary">
             Go to Homepage
@@ -72,12 +72,12 @@ export const PublicBookingPage = () => {
       {/* Host & Schedule Header Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, var(--primary-light), rgba(14, 165, 233, 0.15))',
-          border: '1px solid var(--border-light)',
-          borderRadius: 'var(--radius-lg)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
+          borderTop: '4px solid var(--primary)',
+          borderRadius: 'var(--radius-md)',
           padding: '2rem',
           marginBottom: '2rem',
-          backdropFilter: 'blur(12px)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
@@ -85,8 +85,8 @@ export const PublicBookingPage = () => {
             {schedule.owner?.name ? schedule.owner.name[0] : 'T'}
           </div>
           <div>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Tutoring & Office Hours Host
+            <span style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+              Office hours with
             </span>
             <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>
               {schedule.owner?.name} ({schedule.owner?.email})
@@ -94,7 +94,7 @@ export const PublicBookingPage = () => {
           </div>
         </div>
 
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{schedule.title}</h1>
+        <h1 style={{ fontSize: '2.6rem', marginBottom: '0.5rem' }}>{schedule.title}</h1>
         {schedule.description && (
           <p style={{ fontSize: '1rem', color: 'var(--text-main)', opacity: 0.9, maxWidth: '800px' }}>
             {schedule.description}

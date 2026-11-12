@@ -134,7 +134,7 @@ export const ScheduleDetailPage = () => {
           onClick={() => navigate('/dashboard')}
           style={{ marginBottom: '1rem' }}
         >
-          Back to Dashboard
+          Back to dashboard
         </Button>
         <div className="alert alert-danger">{error || 'Schedule not found.'}</div>
       </div>
@@ -151,7 +151,7 @@ export const ScheduleDetailPage = () => {
           icon={ArrowLeft}
           onClick={() => navigate('/dashboard')}
         >
-          Back to Dashboard
+          Back to dashboard
         </Button>
       </div>
 
@@ -178,7 +178,7 @@ export const ScheduleDetailPage = () => {
             >
               <h1>{schedule.title}</h1>
               <span className={`badge ${schedule.isActive ? 'badge-active' : 'badge-rejected'}`}>
-                {schedule.isActive ? 'Accepting Bookings' : 'Paused'}
+                {schedule.isActive ? 'Accepting bookings' : 'Paused'}
               </span>
             </div>
             <p style={{ maxWidth: '750px' }}>
@@ -194,13 +194,13 @@ export const ScheduleDetailPage = () => {
               }}
             >
               <span>
-                Meeting Duration: <strong>{schedule.slotDuration} mins</strong>
+                Meeting length: <strong>{schedule.slotDuration} mins</strong>
               </span>
               <span>
-                Total Slots: <strong>{schedule.timeSlots?.length || 0}</strong>
+                Total slots: <strong>{schedule.timeSlots?.length || 0}</strong>
               </span>
               <span>
-                Pending Requests: <strong>{bookings.filter((b) => b.status === 'pending').length}</strong>
+                Pending requests: <strong>{bookings.filter((b) => b.status === 'pending').length}</strong>
               </span>
             </div>
           </div>
@@ -211,7 +211,7 @@ export const ScheduleDetailPage = () => {
               icon={schedule.isActive ? PauseCircle : PlayCircle}
               onClick={handleToggleActive}
             >
-              {schedule.isActive ? 'Pause Bookings' : 'Resume Bookings'}
+              {schedule.isActive ? 'Pause bookings' : 'Resume bookings'}
             </Button>
 
             <Button
@@ -219,7 +219,7 @@ export const ScheduleDetailPage = () => {
               icon={Share2}
               onClick={() => setShareOpen(true)}
             >
-              Share Link
+              Share link
             </Button>
 
             <Button
@@ -234,13 +234,13 @@ export const ScheduleDetailPage = () => {
       </Card>
 
       {/* Booking Requests & Approvals Section */}
-      <Card title="Meeting Requests & Approvals" style={{ marginBottom: '2rem' }}>
+      <Card title="Requests" style={{ marginBottom: '2rem' }}>
         <BookingRequestsList bookings={bookings} onStatusChanged={loadData} />
       </Card>
 
       {/* Time Slots Management Card */}
       <Card
-        title="Schedule Time Slots & Calendar Grid"
+        title="Time slots"
         action={
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             {/* View Mode Toggle */}
@@ -291,7 +291,7 @@ export const ScheduleDetailPage = () => {
               icon={Plus}
               onClick={() => setShowAddSlot(!showAddSlot)}
             >
-              {showAddSlot ? 'Cancel Add' : 'Add More Slots'}
+              {showAddSlot ? 'Cancel' : 'Add slots'}
             </Button>
           </div>
         }
@@ -399,7 +399,7 @@ export const ScheduleDetailPage = () => {
                           style={{
                             background: 'transparent',
                             border: 'none',
-                            color: '#f87171',
+                            color: 'var(--danger-text)',
                             cursor: 'pointer',
                             padding: '0.25rem',
                             display: 'flex',

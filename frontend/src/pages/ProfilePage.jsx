@@ -62,16 +62,16 @@ export const ProfilePage = () => {
       {/* Profile Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, var(--primary-light), rgba(14, 165, 233, 0.15))',
-          border: '1px solid var(--border-light)',
-          borderRadius: 'var(--radius-lg)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
+          borderTop: '4px solid var(--primary)',
+          borderRadius: 'var(--radius-md)',
           padding: '2rem',
           marginBottom: '2rem',
           display: 'flex',
           alignItems: 'center',
           gap: '1.5rem',
           flexWrap: 'wrap',
-          backdropFilter: 'blur(12px)',
         }}
       >
         <div
@@ -79,15 +79,15 @@ export const ProfilePage = () => {
           style={{
             width: '72px',
             height: '72px',
-            fontSize: '1.75rem',
-            boxShadow: '0 8px 24px var(--primary-glow)',
+            fontSize: '1.9rem',
+            fontFamily: 'var(--font-heading)',
           }}
         >
           {getInitials(name || user?.name)}
         </div>
 
         <div>
-          <h1 style={{ fontSize: '1.8rem', marginBottom: '0.25rem' }}>{name || user?.name}</h1>
+          <h1 style={{ fontSize: '2.2rem', marginBottom: '0.25rem' }}>{name || user?.name}</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               <Mail size={15} /> {email || user?.email}
@@ -120,7 +120,7 @@ export const ProfilePage = () => {
                 Theme Mode
               </div>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                {isDark ? 'Dark Midnight Mode' : 'Bright Daylight Mode'}
+                {isDark ? 'Dark mode' : 'Light mode'}
               </div>
             </div>
 
@@ -189,7 +189,7 @@ export const ProfilePage = () => {
 
           <form onSubmit={handleSaveProfile}>
             <div className="form-group">
-              <label className="form-label">Full Name</label>
+              <label className="form-label">Full name</label>
               <input
                 type="text"
                 required
@@ -201,7 +201,7 @@ export const ProfilePage = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Email Address</label>
+              <label className="form-label">Email</label>
               <input
                 type="email"
                 required
@@ -213,7 +213,7 @@ export const ProfilePage = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Account Role</label>
+              <label className="form-label">Role</label>
               <input
                 type="text"
                 readOnly
@@ -233,7 +233,7 @@ export const ProfilePage = () => {
               icon={Save}
               style={{ width: '100%', marginTop: '0.5rem' }}
             >
-              {saving ? 'Saving Details...' : 'Save Profile Changes'}
+              {saving ? 'Saving…' : 'Save changes'}
             </Button>
           </form>
         </Card>

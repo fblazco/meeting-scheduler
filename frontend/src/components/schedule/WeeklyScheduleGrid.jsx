@@ -258,7 +258,7 @@ export const WeeklyScheduleGrid = ({
             <ChevronLeft size={16} />
           </button>
           <button type="button" className="excel-today-btn" onClick={handleToday}>
-            This Week
+            This week
           </button>
           <button
             type="button"
@@ -286,7 +286,7 @@ export const WeeklyScheduleGrid = ({
                 marginLeft: '0.5rem',
               }}
             >
-              <GraduationCap size={13} /> Uni Schedule (Modules 1–9 + Lunch)
+              <GraduationCap size={13} /> University modules 1–9, lunch
             </span>
           )}
         </div>
@@ -315,7 +315,7 @@ export const WeeklyScheduleGrid = ({
         <div className="excel-legend">
           <span className="legend-item">
             <span className="legend-box available" />
-            {mode === 'creator' ? 'Available (Active)' : 'Available Slot'}
+            {mode === 'creator' ? 'Available' : 'Available'}
           </span>
           {mode !== 'creator' && (
             <span className="legend-item">
@@ -326,7 +326,7 @@ export const WeeklyScheduleGrid = ({
           {isUniSchedule && (
             <span className="legend-item">
               <span className="legend-box lunch" />
-              Almuerzo / Lunch Block
+              Lunch break
             </span>
           )}
           <span className="legend-item">
@@ -371,7 +371,7 @@ export const WeeklyScheduleGrid = ({
                   >
                     {isUniSchedule ? (
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px' }}>
-                        <span style={{ fontWeight: 700, color: isLunchRow ? '#d97706' : 'var(--primary)', display: 'flex', alignItems: 'center', gap: '3px' }}>
+                        <span style={{ fontWeight: 700, color: isLunchRow ? 'var(--warning-text)' : 'var(--primary)', display: 'flex', alignItems: 'center', gap: '3px' }}>
                           {isLunchRow && <Utensils size={11} />}
                           {rowItem.module}
                         </span>
@@ -411,7 +411,7 @@ export const WeeklyScheduleGrid = ({
                         {isSelectedInCreator && (
                           <div className="cell-content active-badge">
                             <Check size={12} strokeWidth={3} />
-                            <span>{isLunchRow ? '🍽️ Almuerzo' : (isUniSchedule ? `Mod ${rowItem.module}` : 'Open')}</span>
+                            <span>{isLunchRow ? 'Almuerzo' : (isUniSchedule ? `Mod ${rowItem.module}` : 'Open')}</span>
                           </div>
                         )}
 
@@ -424,7 +424,7 @@ export const WeeklyScheduleGrid = ({
                                 <strong>Selected</strong>
                               </>
                             ) : (
-                              <span>{isLunchRow ? '🍽️ Available' : 'Available'}</span>
+                              <span>{isLunchRow ? 'Available' : 'Available'}</span>
                             )}
                           </div>
                         )}
@@ -439,7 +439,7 @@ export const WeeklyScheduleGrid = ({
                         {/* Viewer mode slot */}
                         {mode === 'viewer' && existingSlot && !isBooked && (
                           <div className="cell-content viewer-badge">
-                            <span>{isLunchRow ? '🍽️ Almuerzo' : (isUniSchedule ? `Mod ${rowItem.module}` : 'Open')}</span>
+                            <span>{isLunchRow ? 'Almuerzo' : (isUniSchedule ? `Mod ${rowItem.module}` : 'Open')}</span>
                             {onDeleteSlot && (
                               <button
                                 type="button"
@@ -472,11 +472,11 @@ export const WeeklyScheduleGrid = ({
             <Layers size={16} color="var(--primary)" />
             {mode === 'creator'
               ? `Configured Available Slots (${selectedSlots.length})`
-              : `Total Schedule Slots (${existingSlots.length})`}
+              : `All slots (${existingSlots.length})`}
           </h4>
           <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             {isUniSchedule
-              ? 'Uni Academic Modules (1h 10m + Lunch Block available)'
+              ? 'University modules (1h 10m + Lunch Block available)'
               : `${slotDuration} minutes per meeting slot`}
           </span>
         </div>

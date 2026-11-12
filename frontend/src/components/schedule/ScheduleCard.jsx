@@ -52,7 +52,7 @@ export const ScheduleCard = ({ schedule }) => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
             <Calendar size={15} color="var(--primary)" />
             <span>
-              <strong style={{ color: 'var(--text-main)' }}>{availableSlots}</strong>/{totalSlots} Open Slots
+              <strong style={{ color: 'var(--text-main)' }}>{availableSlots}</strong>/{totalSlots} open slots
             </span>
           </div>
 
@@ -64,7 +64,7 @@ export const ScheduleCard = ({ schedule }) => {
           {pendingBookings > 0 && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               <span className="badge badge-pending">
-                {pendingBookings} Pending {pendingBookings === 1 ? 'Req' : 'Reqs'}
+                {pendingBookings} {pendingBookings === 1 ? 'request' : 'requests'} waiting
               </span>
             </div>
           )}
@@ -81,7 +81,7 @@ export const ScheduleCard = ({ schedule }) => {
             icon={Share2}
             onClick={() => setShareOpen(true)}
           >
-            Share Link
+            Share link
           </Button>
 
           <Button

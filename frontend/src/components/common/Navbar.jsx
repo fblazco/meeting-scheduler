@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Calendar, LayoutDashboard, LogOut, LogIn, UserPlus, Sun, Moon, User } from 'lucide-react';
+import { LayoutDashboard, LogOut, LogIn, UserPlus, Sun, Moon, User } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
 import useTheme from '../../hooks/useTheme';
 import Button from './Button';
@@ -30,9 +30,7 @@ export const Navbar = () => {
     <header className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">
-          <div className="brand-icon">
-            <Calendar size={20} />
-          </div>
+          <span className="brand-seal" aria-hidden="true">T</span>
           <span>TutorSync</span>
         </Link>
 
@@ -42,8 +40,8 @@ export const Navbar = () => {
             type="button"
             className="theme-toggle-btn"
             onClick={toggleTheme}
-            title={isDark ? 'Switch to Bright Daylight Mode' : 'Switch to Dark Midnight Mode'}
-            aria-label="Toggle Theme"
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -70,7 +68,7 @@ export const Navbar = () => {
                   border: location.pathname === '/profile' ? '1px solid var(--primary)' : '1px solid var(--border)',
                   background: location.pathname === '/profile' ? 'var(--primary-light)' : 'var(--bg-surface)',
                 }}
-                title="View & Edit Your Profile"
+                title="Your profile"
               >
                 <div className="user-avatar">{getInitials(user?.name)}</div>
                 <span style={{ fontWeight: 500 }}>{user?.name || user?.email}</span>
@@ -82,7 +80,7 @@ export const Navbar = () => {
                 onClick={handleLogout}
                 icon={LogOut}
               >
-                Logout
+                Sign out
               </Button>
             </>
           ) : (
@@ -92,12 +90,12 @@ export const Navbar = () => {
                 className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}
               >
                 <LogIn size={18} />
-                <span>Sign In</span>
+                <span>Sign in</span>
               </Link>
 
               <Link to="/login?mode=register">
                 <Button size="sm" icon={UserPlus}>
-                  Get Started
+                  Create account
                 </Button>
               </Link>
             </>

@@ -41,7 +41,7 @@ export const BookingRequestsList = ({ bookings, onStatusChanged }) => {
       <div>
         <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
           <span className="badge badge-pending">{pendingBookings.length}</span>
-          Pending Requests
+          Pending requests
         </h4>
 
         {pendingBookings.length === 0 ? (
@@ -109,7 +109,7 @@ export const BookingRequestsList = ({ bookings, onStatusChanged }) => {
                       disabled={isUpdating}
                       onClick={() => handleUpdateStatus(booking.id, 'accepted')}
                     >
-                      {isUpdating ? 'Updating...' : 'Accept & Confirm'}
+                      {isUpdating ? 'Updating...' : 'Accept'}
                     </Button>
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export const BookingRequestsList = ({ bookings, onStatusChanged }) => {
       {pastBookings.length > 0 && (
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.25rem' }}>
           <h4 style={{ marginBottom: '0.75rem', color: 'var(--text-muted)', fontSize: '1rem' }}>
-            Request History ({pastBookings.length})
+            History ({pastBookings.length})
           </h4>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

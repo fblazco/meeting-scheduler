@@ -10,7 +10,7 @@ export const NotFoundPage = () => {
         <AlertTriangle size={64} style={{ margin: '0 auto' }} />
       </div>
       <h1 style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>404</h1>
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Page Not Found</h2>
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Page not found</h2>
       <p style={{ marginBottom: '2rem' }}>
         The page or scheduling calendar you are looking for does not exist or has been removed.
       </p>

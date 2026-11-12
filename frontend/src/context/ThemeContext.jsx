@@ -14,7 +14,8 @@ export const ThemeProvider = ({ children }) => {
   });
 
   const [colorTheme, setColorTheme] = useState(() => {
-    return localStorage.getItem('colorTheme') || 'indigo';
+    const saved = localStorage.getItem('colorTheme');
+    return COLOR_THEMES.some((t) => t.id === saved) ? saved : 'moss';
   });
 
   useEffect(() => {

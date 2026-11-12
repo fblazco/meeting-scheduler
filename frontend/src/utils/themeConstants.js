@@ -1,10 +1,9 @@
 export const COLOR_THEMES = [
-  { id: 'indigo', name: 'Academic Indigo', color: '#6366f1' },
-  { id: 'ocean', name: 'Ocean Sky', color: '#0ea5e9' },
-  { id: 'emerald', name: 'Emerald Forest', color: '#10b981' },
-  { id: 'violet', name: 'Royal Violet', color: '#8b5cf6' },
-  { id: 'rose', name: 'Sunset Rose', color: '#f43f5e' },
-  { id: 'amber', name: 'Warm Amber', color: '#f59e0b' },
+  { id: 'moss', name: 'Moss', color: '#44593b' },
+  { id: 'pine', name: 'Pine', color: '#2f5a4f' },
+  { id: 'umber', name: 'Umber', color: '#6b4a2f' },
+  { id: 'oxblood', name: 'Oxblood', color: '#7e3428' },
+  { id: 'slate', name: 'Slate', color: '#4a5a63' },
 ];
 
 export default COLOR_THEMES;

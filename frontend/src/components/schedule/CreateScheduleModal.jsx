@@ -129,7 +129,7 @@ export const CreateScheduleModal = ({ isOpen, onClose, onSuccess }) => {
                 <option value={30}>30 Minutes</option>
                 <option value={45}>45 Minutes</option>
                 <option value={60}>60 Minutes (1 Hour)</option>
-                <option value={70}>🎓 Uni Schedule (1h 10m Modules + 13:30 Lunch Break)</option>
+                <option value={70}>University modules (1h 10m, lunch at 13:30)</option>
               </select>
             </div>
 

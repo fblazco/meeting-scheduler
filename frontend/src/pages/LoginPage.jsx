@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { LogIn, UserPlus, Calendar, ArrowRight, ShieldCheck } from 'lucide-react';
+import { LogIn, UserPlus } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
@@ -46,26 +46,12 @@ export const LoginPage = () => {
     <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
       <div style={{ width: '100%', maxWidth: '440px' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div
-            style={{
-              width: '54px',
-              height: '54px',
-              background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-              borderRadius: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1rem auto',
-              boxShadow: '0 8px 24px var(--primary-glow)',
-            }}
-          >
-            <Calendar size={28} color="white" />
-          </div>
-          <h1>{isRegister ? 'Create Your Account' : 'Welcome Back'}</h1>
-          <p style={{ marginTop: '0.35rem' }}>
+          <span className="brand-seal brand-seal-lg" aria-hidden="true" style={{ margin: '0 auto 1.25rem' }}>T</span>
+          <h1>{isRegister ? 'Create your account' : 'Sign in to TutorSync'}</h1>
+          <p style={{ marginTop: '0.5rem', fontFamily: 'var(--font-heading)', fontStyle: 'italic', fontSize: '1.15rem' }}>
             {isRegister
-              ? 'Start hosting office hours and managing student appointments'
-              : 'Sign in to manage your tutoring schedules and bookings'}
+              ? 'Publish your office hours and let students book a time.'
+              : 'Office hours and student appointments, in one place.'}
           </p>
         </div>
 
@@ -75,11 +61,11 @@ export const LoginPage = () => {
           <form onSubmit={handleSubmit}>
             {isRegister && (
               <div className="form-group">
-                <label className="form-label">Full Name</label>
+                <label className="form-label">Full name</label>
                 <input
                   type="text"
                   required
-                  placeholder="Prof. or Tutor Name"
+                  placeholder="Dr. Ana Morales"
                   className="form-input"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -88,7 +74,7 @@ export const LoginPage = () => {
             )}
 
             <div className="form-group">
-              <label className="form-label">Email Address</label>
+              <label className="form-label">University email</label>
               <input
                 type="email"
                 required
@@ -119,10 +105,10 @@ export const LoginPage = () => {
               style={{ width: '100%', marginTop: '0.75rem' }}
             >
               {loading
-                ? 'Processing...'
+                ? (isRegister ? 'Creating account…' : 'Signing in…')
                 : isRegister
-                ? 'Create Account'
-                : 'Sign In'}
+                ? 'Create account'
+                : 'Sign in'}
             </Button>
           </form>
 
@@ -152,7 +138,7 @@ export const LoginPage = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  Sign In
+                  Sign in
                 </button>
               </p>
             ) : (
@@ -172,7 +158,7 @@ export const LoginPage = () => {
                     cursor: 'pointer',
                   }}
                 >
-                  Create one now
+                  Create one
                 </button>
               </p>
             )}

@@ -10,7 +10,7 @@ export const ScheduleList = ({ schedules, onOpenCreateModal }) => {
         <div className="empty-icon">
           <Sparkles size={48} color="var(--primary)" />
         </div>
-        <h3 style={{ marginBottom: '0.5rem' }}>No Schedules Created Yet</h3>
+        <h3 style={{ marginBottom: '0.5rem' }}>No schedules yet</h3>
         <p style={{ maxWidth: '440px', margin: '0 auto 1.5rem auto' }}>
           Create your first scheduling space to define bookable hours, share your custom link, and start accepting meeting requests.
         </p>
